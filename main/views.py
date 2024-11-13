@@ -16,7 +16,6 @@ from django.http import JsonResponse
 import json
 
 # Create your views here.
-@csrf_exempt
 def register(request):
     form = UserCreationForm()
 
@@ -29,7 +28,6 @@ def register(request):
     context = {'form':form}
     return render(request, 'register.html', context)
 
-@csrf_exempt
 def login_user(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -48,14 +46,12 @@ def login_user(request):
     context = {'form': form}
     return render(request, 'login.html', context)
 
-@csrf_exempt
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
 
-@csrf_exempt
 @login_required(login_url='/login')
 def show_main(request):
 
@@ -68,7 +64,6 @@ def show_main(request):
 
     return render(request, "main.html", context)
 
-@csrf_exempt
 def create_mood_entry(request):
     form = MoodEntryForm(request.POST or None)
 
@@ -113,7 +108,6 @@ def create_mood_flutter(request):
     else:
         return JsonResponse({"status": "error"}, status=401)
 
-@csrf_exempt
 def edit_mood(request, id):
     # Get mood entry berdasarkan id
     mood = MoodEntry.objects.get(pk=id)
@@ -129,7 +123,6 @@ def edit_mood(request, id):
     context = {'form': form}
     return render(request, "edit_mood.html", context)
 
-@csrf_exempt
 def delete_mood(request, id):
     # Get mood berdasarkan id
     mood = MoodEntry.objects.get(pk = id)
@@ -138,22 +131,18 @@ def delete_mood(request, id):
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
 
-@csrf_exempt
 def show_xml(request):
     data = MoodEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
-@csrf_exempt
 def show_json(request):
     data = MoodEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
-@csrf_exempt
 def show_xml_by_id(request, id):
     data = MoodEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
-@csrf_exempt
 def show_json_by_id(request, id):
     data = MoodEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
