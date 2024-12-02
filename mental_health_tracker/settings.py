@@ -135,7 +135,7 @@ else:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://joshua-montolalu-mentalhealthtracker.pbp.cs.ui.ac.id/", "https://joshua-montolalu-mentalhealthtracker.pbp.cs.ui.ac.id/"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://joshua-montolalu-mentalhealthtracker.pbp.cs.ui.ac.id", "https://joshua-montolalu-mentalhealthtracker.pbp.cs.ui.ac.id"]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_SECURE = True
